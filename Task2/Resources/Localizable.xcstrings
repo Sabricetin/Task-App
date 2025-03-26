@@ -1,0 +1,92 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lf ₺" : {
+
+    },
+    "İade Politikası: %@" : {
+
+    },
+    "internetError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please check your internet connection"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lutfen internetinizi kontrol ediniz"
+          }
+        }
+      }
+    },
+    "Kategori: %@" : {
+
+    },
+    "loadError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong please try again later"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beklenmedik bir durum oluştur, lutfen tekrar deneyiniz"
+          }
+        }
+      }
+    },
+    "Minimum Sipariş Miktarı: %lld" : {
+
+    },
+    "productDetail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Product Detail"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ürün Detayı"
+          }
+        }
+      }
+    },
+    "products" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Products"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ürünler"
+          }
+        }
+      }
+    },
+    "Puan: %lld" : {
+
+    },
+    "Yükleniyor..." : {
+
+    }
+  },
+  "version" : "1.0"
+}
