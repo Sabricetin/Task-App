@@ -46,6 +46,7 @@ class ProductViewModel: ObservableObject {
                 DispatchQueue.main.async {
                         self.products.append(contentsOf: products)
                         self.isLoading = false
+                    //burda alinca coreData ile kayit edebiliriz
                     }
             })
             .store(in: &cancellables) // Combine aboneliğini tutuyoruz

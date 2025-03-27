@@ -26,6 +26,7 @@ class ProductDetailViewModel: ObservableObject {
                 // Başarı durumunda ürün detaylarını güncelliyoruz
                 DispatchQueue.main.async {
                     self.selectedProductDetail = detail
+                    //burda urun detayini coreData uzerinden kayit edebiliriz
                 }
             })
             .store(in: &cancellables) // Combine aboneliğini tutuyoruz
