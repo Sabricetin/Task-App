@@ -44,16 +44,21 @@ struct ProductListView: View {
                     Color.clear.onAppear {
                         // Kullanıcı listenin sonuna geldiğinde yeni verileri yükle
                         if geometry.frame(in: .global).maxY < UIScreen.main.bounds.height + 100 {
-                           //burda siradaki sayfayi yukleyebiliriz
+                           //burda siradaki sayfayi yukleyebiliriz loadNextPage
                         }
                     }
                 })
-            
-                
             }
         }
        
     }
+    
+    // Sayfa yükleme fonksiyonu
+        private func loadNextPage() {
+            guard !viewModel.isLoading else { return } // Zaten yükleme yapılıyorsa bir şey yapma
+            viewModel.isLoading = true
+            viewModel.fetchNextPage() // Yeni sayfa verilerini al
+        }
 }
 
 struct ProductListView_Previews: PreviewProvider {

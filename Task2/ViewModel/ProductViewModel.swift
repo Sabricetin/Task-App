@@ -12,11 +12,22 @@ class ProductViewModel: ObservableObject {
     private let persistenceController = PersistenceController.shared
 
     
-    private var page = 1  // Başlangıç sayfası
-    private var totalPages = 1 // Toplam sayfa sayısı
+    private var currentPage = 1
+
+    // Ürünleri fetch etmek
+      func fetchProducts() {
+          // İlk sayfayı çekiyoruz
+          fetchProducts(page: currentPage)
+      }
+
+      func fetchNextPage() {
+          // Sayfa numarasını artırarak yeni verileri çekiyoruz
+          currentPage += 1
+          fetchProducts(page: currentPage)
+      }
     
     // Ürünleri fetch etmek
-    func fetchProducts() {
+    func fetchProducts(page: Int) {
       
         // APIClient.shared.fetchProducts artık Combine kullanarak dönecek
         APIClient.shared.fetchProducts(page: page)
@@ -34,7 +45,6 @@ class ProductViewModel: ObservableObject {
                 // Başarı durumunda ürünleri güncelliyoruz
                 DispatchQueue.main.async {
                         self.products.append(contentsOf: products)
-                        self.page += 1  // Sayfayı bir arttır
                         self.isLoading = false
                     }
             })
