@@ -42,25 +42,41 @@ class APIClient {
         }
         
         let request = URLRequest(url: url)
-               
-               // Eğer önbellekten çekilen veri varsa, bu veriyi kullanıyoruz
-               if let cachedResponse = URLCache.shared.cachedResponse(for: request) {
-                   // Önbellekten alınan veriyi çözümle
-                   if let productDetail = parseJSON(data: cachedResponse.data, modelType: ProductDetailModel.self) {
-                       return Just(productDetail)
-                           .setFailureType(to: APIError.self)
-                           .eraseToAnyPublisher()
-                   }
-               }
+        
+        // Eğer önbellekten çekilen veri varsa, bu veriyi kullanıyoruz
+        if let cachedResponse = URLCache.shared.cachedResponse(for: request) {
+            // Önbellekten alınan veriyi çözümle
+            if let productDetail = parseJSON(data: cachedResponse.data, modelType: ProductDetailModel.self) {
+                return Just(productDetail)
+                    .setFailureType(to: APIError.self)
+                    .eraseToAnyPublisher()
+            } else {
+                // Önbellekten alınan veri geçersizse, hata dönüyoruz
+                return Fail(error: APIError.decodingError)
+                    .eraseToAnyPublisher()
+            }
+        }
         
         return URLSession.shared.dataTaskPublisher(for: url)
-            .map { data, response in
+            .tryMap { data, response -> ProductDetailModel in
                 // Veriyi çözümle
-                return parseJSON(data: data, modelType: ProductDetailModel.self)!
-    
+                if let productDetail = parseJSON(data: data, modelType: ProductDetailModel.self) {
+                    return productDetail
+                } else {
+                    throw APIError.decodingError
+                }
             }
-            .mapError { _ in APIError.networkError } // Ağ hatası
+            .mapError { error in
+                // Hata durumu kontrolü
+                if let urlError = error as? URLError {
+                    return APIError.networkError  // Ağ hatası
+                }
+                return APIError.decodingError  // Çözümleme hatası
+            }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
+
+
+
 }
